@@ -1,0 +1,42 @@
+{% include "header.htm" %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <h2>Raporty</h2>
+    <div style="text-align: right;">
+        <a href="/create_report" class="btn btn-success btn-sm">
+            <span data-feather="file-plus"></span>
+            Dodaj nowy raport
+        </a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Od</th>
+                <th scope="col">Do</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for report in reports %}
+            <tr>
+                <td>{{ report.id }}</td>
+                <td>{{ report.from_moment }}</td>
+                <td>{{ report.to_moment }}</td>
+                <td>
+                    <a href="/read_report/{{ report.id }}" class="btn btn-primary btn-sm">
+                        <span data-feather="eye"></span>
+                        Podgląd
+                    </a>
+                    <a href="/delete_report/{{ report.id }}" class="btn btn-danger btn-sm">
+                        <span data-feather="file-minus"></span>
+                        Usuń
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% include "footer.htm" %}

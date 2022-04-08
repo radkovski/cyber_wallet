@@ -1,0 +1,15 @@
+{% include "header.htm" %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <h2>Edytuj operację</h2>
+    <form method="post" action="?">
+        {% csrf_token %}
+        <table>
+            {{ form.as_p }}
+        </table>
+        <input class="form-control" type="submit" value="Zmień" />
+    </form>
+    {% if has_object_updated %}
+    <span style="color: green;">Zaktualizowano poprawnie!</span>
+    {% endif %}
+</main>
+{% include "footer.htm" %}

@@ -1,0 +1,50 @@
+{% include "header.htm" %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <h2>Raport z okresu od {{ report.from_moment }} do {{ report.to_moment }}</h2>
+
+    <canvas class="my-4 w-100" id="myChart" width="900" height="200"></canvas>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+        integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+        crossorigin="anonymous"></script>
+<script>
+    (function () {
+  'use strict'
+  var ctx = document.getElementById('myChart')
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [
+         {% for operation in operations %}
+            '{{ operation.execution_moment__date }}',
+         {% endfor %}
+      ],
+      datasets: [{
+        data: [
+          {% for operation in operations %}
+            {{ operation.total|stringformat:".2f" }},
+          {% endfor %}
+        ],
+        lineTension: 0,
+        backgroundColor: '#eee',
+        borderColor: '#007bff',
+        borderWidth: 1,
+        pointBackgroundColor: '#007bff'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      },
+      legend: {
+        display: false
+      }
+    }
+  })
+})()
+</script>
+{% include "footer.htm" %}

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <title>CyberWallet 1.0</title>
+
+    <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
+    <link href="https://getbootstrap.com/docs/5.0/examples/dashboard/dashboard.css" rel="stylesheet">
+    <script src="https://getbootstrap.com/docs/5.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+            integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+
+    <meta name="theme-color" content="#7952b3">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      .table > tbody > tr > td {
+        vertical-align: middle;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+
+        @font-face {
+        font-family: 'DancingScript';
+            {% load static %}
+            src: url({% static 'DancingScript.ttf' %})  format('truetype');
+        }
+
+        .centered {
+          position: relative;
+          top: -60%;
+          left: 0%;
+          padding: 1em;
+          overflow-wrap: break-word;
+          font-family: 'DancingScript';
+        }
+
+        .income, .outcome
+        {
+            font-family: Consolas;
+            font-size: 17pt;
+        }
+
+        .income
+        {
+            color: #11aa55;
+        }
+
+        .outcome
+        {
+            color: #cc3311;
+        }
+    </style>
+
+    {{ form.media }}
+</head>
+<body>
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/">CyberWallet 1.0</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
+            {% if user.is_authenticated %}
+            <a class="nav-link px-3" href="/accounts/logout">Wyloguj ({{ user.get_username }})</a>
+            {% else %}
+            <a class="nav-link px-3" href="/accounts/login">Logowanie</a>
+            {% endif %}
+        </div>
+    </div>
+</header>
+
+{% if user.is_authenticated %}
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">
+                            <span data-feather="home"></span>
+                            Pulpit
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/read_operations/' %}active{% endif %}" href="/read_operations">
+                            <span data-feather="dollar-sign"></span>
+                            Operacje
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/read_reports/' %}active{% endif %}" href="/read_reports">
+                            <span data-feather="activity"></span>
+                            Raporty
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/read_notes/' %}active{% endif %}" href="/read_notes">
+                            <span data-feather="file-text"></span>
+                            Notatki
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/settings/' %}active{% endif %}" href="/settings">
+                            <span data-feather="settings"></span>
+                            Ustawienia
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/info/' %}active{% endif %}" href="/info">
+                            <span data-feather="info"></span>
+                            O aplikacji
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+    </div>
+</div>
+{% endif %}
+
+

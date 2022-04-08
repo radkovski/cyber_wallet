@@ -1,0 +1,52 @@
+{% include "header.htm" %}
+{% load mathfilters %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <h2>Operacje</h2>
+            <div style="text-align: right;">
+                <a href="/create_operation" class="btn btn-success btn-sm">
+                    <span data-feather="file-plus"></span>
+                    Dodaj nową operację
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Data dodania</th>
+                        <th scope="col">Opis</th>
+                        <th scope="col">Kwota</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for operation in operations %}
+                            <tr>
+                                <td>{% if operation.is_income %}
+                                    <span class="income">⬇</span>
+                                {% else %}
+                                    <span class="outcome">⬆</span>
+                                {% endif %}
+                                </td>
+                                <td>{{ operation.id }}</td>
+                                <td>{{ operation.execution_moment }}</td>
+                                <td>{{ operation.description }}</td>
+                                <td>{{ operation.amount|abs }} zł</td>
+                                <td>
+                                    <a href="/update_operation/{{ operation.id }}" class="btn btn-primary btn-sm">
+                                        <span data-feather="edit"></span>
+                                        Zmień
+                                    </a>
+                                    <a href="/delete_operation/{{ operation.id }}" class="btn btn-danger btn-sm">
+                                        <span data-feather="file-minus"></span>
+                                        Usuń
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+{% include "footer.htm" %}
