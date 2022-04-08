@@ -167,6 +167,7 @@ def read_report(request, pk):
     """
     report = get_object_or_404(Report, pk=pk, user=request.user)
     operations = (Operation.objects.values("execution_moment__date")
+                  .filter(user=request.user) # po userze filtruje raport, żeby się wyświtlały tylko danego usera.
                   .order_by("execution_moment__date")
                   .annotate(total=Sum("amount")))
     return render(request, "read_report.htm", {
