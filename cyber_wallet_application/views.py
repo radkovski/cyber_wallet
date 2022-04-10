@@ -13,6 +13,14 @@ from cyber_wallet_application.models import Operation, Report, Note, LocalConfig
 LOGIN_URL = "/accounts/login/"
 
 
+# funkcja pomocnicza licząca saldo użytkownika 'user' do daty 'to_moment" (domyślnie dzień dzisiejszy)
+def calculate_balance(user, to_moment=datetime.datetime.today()):
+    return(Operation.objects
+           .filter(user=user)
+           .filter(execution_moment__lte=to_moment)
+           .aggregate(balance=Sum("amount")))["balance"]
+
+
 @login_required(login_url=LOGIN_URL)
 @require_http_methods(["GET"])
 def index(request):

@@ -35,6 +35,14 @@
             {% endfor %}
             </tbody>
         </table>
+        <div style="font-weight: bold; font-size: 13pt; color: #777">
+            Saldo:
+            {% if balance < 0 %}
+            <span class="outcome">{{ balance|stringformat:".2f" }} zł</span>
+            {% else %}
+            <span class="income">{{ balance|stringformat:".2f" }} zł</span>
+            {% endif %}
+        </div>
     </div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h2 class="h2">Raport tygodniowy</h2>
@@ -56,7 +64,7 @@
     </div>
     {% endif %}
     {% empty %}
-        <p>Brak notatek.</p>
+    <p>Brak notatek.</p>
     {% endfor %}
 
 </main>
