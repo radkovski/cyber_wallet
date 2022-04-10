@@ -5,6 +5,7 @@ django
 django-tempus-dominus
 pytest-django
 psycopg2-binary
+Django-mathfilters
 
 (tempus-dominus jest to komponent użyty do kalendarza dla Bootstrap (django-tempus-dominus to port do Django))
 
